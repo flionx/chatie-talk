@@ -1,18 +1,22 @@
+import type { FC } from 'react'
+import type { IChatMessage } from '../../types/chat'
 import Subtitle from '../Subtitle/Subtitle'
 import TitleBig from '../TitleBig/TitleBig'
 import ChatMessage from '../ChatMessage/ChatMessage'
-import { useState } from 'react'
-import type { IChatMessage } from '../../types/chat'
+import styles from './index.module.css'
+interface Props {
+  chatHistory: IChatMessage[],
+}
 
-const Chat = () => {
-    const [chatHistory, setChatHistory] = useState<IChatMessage>([])
+const Chat: FC<Props> = ({chatHistory}) => {
 
   return (
-    <section className='chat'>
-        <h1 className='title'><Subtitle>Hi there!</Subtitle></h1>
-        <h2 className='subtitle'><TitleBig>What would you like to know?</TitleBig></h2>
-        <ChatMessage type='bot'>Use one of the most common prompts below or ask your own question</ChatMessage>
-        <ChatMessage type='user'>Use one of the most common prompts below or ask your own question</ChatMessage>
+    <section className={styles.chat}>
+        <h1 className={styles.title}><Subtitle>Hi there!</Subtitle></h1>
+        <h2 className={styles.subtitle}><TitleBig>What would you like to know?</TitleBig></h2>
+        {chatHistory.map(message => (
+          <ChatMessage key={message.id} type={message.type}>{message.message}</ChatMessage>
+        ))}
     </section>
   )
 }

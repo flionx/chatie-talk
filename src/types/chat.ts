@@ -1,4 +1,5 @@
 export interface IChatMessage {
+    id: string,
     type: TMessageAuthor,
     message: string
 }

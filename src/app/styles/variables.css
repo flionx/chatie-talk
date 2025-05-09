@@ -25,6 +25,7 @@
   --container-padding: clamp(20px, 8.5vw, 125px);
   --block-padding: clamp(12px, 1.3vw, 20px);
   --input-padding: clamp(20px, 1.4vw, 25px);
+  --btn-send-width: clamp(50px, 4.8vw, 70px);
   
   --border-radius-main: 20px;
   --border-radius-secondary: 16px;
