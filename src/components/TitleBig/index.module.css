@@ -1,0 +1,5 @@
+.title {
+    font-weight: 700;
+    font-size: var(--fsize-title);
+    color: var(--color-heading);
+}

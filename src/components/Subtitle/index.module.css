@@ -1,0 +1,5 @@
+.subtitle {
+    font-weight: 700;
+    font-size: var(--fsize-subtitle);
+    color: var(--color-heading);
+}

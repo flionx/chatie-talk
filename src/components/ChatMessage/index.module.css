@@ -1,0 +1,13 @@
+.message {
+    margin-bottom: var(--block-padding);
+}
+.user {
+    width: min(88%, 650px);
+    margin-left: auto;
+    padding: var(--block-padding);
+    background: var(--color-surface);
+    border-radius: var(--border-radius-secondary);
+}
+.bot {
+    width: min(95%, 700px);
+}

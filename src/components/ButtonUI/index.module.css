@@ -1,0 +1,13 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--border-radius-small);
+    background: var(--color-surface);
+    transition: background .3s ease;
+}
+.button:hover {
+    background: var(--color-surface-hover);
+}
