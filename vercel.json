@@ -1,0 +1,8 @@
+{
+  "devCommand": "cd client && npm run dev",
+  "buildCommand": "cd client && npm run build",
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/chat.ts" }
+  ]
+}

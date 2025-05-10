@@ -1,0 +1,23 @@
+.chat {
+    overflow-y: auto;
+    flex: 1;  
+    padding: 10px var(--block-padding) 0 0;
+}
+.chat::-webkit-scrollbar {
+    width: 10px;
+}
+.chat::-webkit-scrollbar-track {
+    background: var(--color-accent);
+    border-radius: var(--border-radius-small);
+}
+.chat::-webkit-scrollbar-thumb {
+    background: var(--color-surface);
+    border-radius: var(--border-radius-small);
+}
+.title {
+    margin-bottom: var(--spacing-big);
+}
+.subtitle {
+    margin-bottom: var(--spacing-medium);
+    line-height: var(--line-height);
+}

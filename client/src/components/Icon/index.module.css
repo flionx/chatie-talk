@@ -1,0 +1,46 @@
+.message {
+    display: block;
+    background-image: var(--url-message);
+    width: 26px;
+    height: 23px;
+}
+.microphone {
+    display: block;
+    background-image: var(--url-microphone);
+    width: 26px;
+    height: 35px;
+}
+.arrow-right {
+    display: block;
+    background-image: var(--url-arrow-right);
+    width: 15px;
+    height: 28px;
+}
+.loading {
+    display: block;
+    background-image: var(--url-loading);
+    width: 33px;
+    height: 33px;
+}
+.loading {
+    display: block;
+    background-image: var(--url-loading);
+    width: 33px;
+    height: 33px;
+    animation: rotate-anim .8s infinite linear;
+}
+.repeat {
+    display: block;
+    background-image: var(--url-repeat);
+    width: 23px;
+    height: 23px;
+}
+
+@keyframes rotate-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
