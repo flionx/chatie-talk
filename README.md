@@ -14,7 +14,7 @@ Sending requests to [Openrouter.ai](https://openrouter.ai/), with the possibilit
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/flionx/chat-me.git
+   git clone https://github.com/flionx/chatie-talk.git
    ```
 2. Go to the project folder:
    ```bash
@@ -44,6 +44,10 @@ Sending requests to [Openrouter.ai](https://openrouter.ai/), with the possibilit
    npm i
    npm run server
    ```
+
+## 📸 Screenshots
+![Image](https://github.com/user-attachments/assets/036cbe96-8369-47d1-aa40-3a6d690b2c66)
+Main interface.
 
 ## Stack
 - Frontend: React + Vite + TypeScript + React markdown
