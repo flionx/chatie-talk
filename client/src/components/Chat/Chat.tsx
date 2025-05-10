@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { FC, RefObject } from 'react'
 import type { IChatMessage } from '../../types/chat'
 import Subtitle from '../Subtitle/Subtitle'
 import TitleBig from '../TitleBig/TitleBig'
@@ -10,10 +10,11 @@ interface Props {
   chatHistory: IChatMessage[],
   isLoading: boolean,
   isError: boolean,
-  repeatSendMessage: () => Promise<void>
+  repeatSendMessage: () => Promise<void>,
+  scrollBlockRef: RefObject<HTMLDivElement | null>
 }
 
-const Chat: FC<Props> = ({chatHistory, isLoading, isError, repeatSendMessage}) => {
+const Chat: FC<Props> = ({chatHistory, isLoading, isError, repeatSendMessage, scrollBlockRef}) => {
 
   return (
     <section className={styles.chat}>
@@ -31,6 +32,7 @@ const Chat: FC<Props> = ({chatHistory, isLoading, isError, repeatSendMessage}) =
               <Text>AI response error</Text>
           </button>
         </>}
+        <div ref={scrollBlockRef} className={styles.scrollblock}></div>
     </section>
   )
 }

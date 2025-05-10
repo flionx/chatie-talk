@@ -6,7 +6,7 @@ import useSendMessage from '../hooks/useSendMessage'
 import './styles/index.css'
 
 function App() {
-  const {chatHistory, clearChatHistory, isLoading, isError, sendMessage, repeatSendMessage} = useSendMessage();
+  const {chatHistory, clearChatHistory, isLoading, isError, sendMessage, repeatSendMessage, scrollBlockRef} = useSendMessage();
   return (
     <main>
       <div className="top-container">
@@ -18,8 +18,9 @@ function App() {
         isLoading={isLoading} 
         isError={isError}
         repeatSendMessage={repeatSendMessage}
+        scrollBlockRef={scrollBlockRef}
       />
-      <InputMessage handleSendMessage={sendMessage} /> 
+      <InputMessage handleSendMessage={sendMessage} isLoading={isLoading}/> 
     </main>
   )
 }

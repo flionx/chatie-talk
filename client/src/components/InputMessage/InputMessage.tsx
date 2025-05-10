@@ -6,14 +6,15 @@ import Icon from "../Icon/Icon"
 import useInput from "../../hooks/useInput"
 interface Props {
     handleSendMessage: TSendMessageFunc,
+    isLoading: boolean,
 }
-const InputMessage:FC<Props> = ({handleSendMessage}) => {
+const InputMessage:FC<Props> = ({handleSendMessage, isLoading}) => {
     const {message, setMessage, isListening, startListening, sendMessageToAI, inputRef} = useInput(handleSendMessage)
 
   return (
     <form className={styles.block} onSubmit={e => {
         e.preventDefault();
-        sendMessageToAI()
+        !isLoading && sendMessageToAI();
     }}>
         <button 
             className={styles.micro} 
@@ -22,7 +23,7 @@ const InputMessage:FC<Props> = ({handleSendMessage}) => {
             <Icon icon="microphone"/>
         </button>
         <div className={styles.send}>
-            <ButtonUI handleClick={sendMessageToAI}>
+            <ButtonUI handleClick={() => !isLoading && sendMessageToAI()}>
                 <Icon icon="arrow-right" />
             </ButtonUI>
         </div>

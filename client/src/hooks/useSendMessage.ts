@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { IChatMessage, TMessageAuthor } from "../types/chat";
 import type { TSetState } from "../types/react";
 import { Message } from "../models/message";
@@ -13,11 +13,13 @@ const useSendMessage = () => {
     const [chatHistory, setChatHistory] = useState<IChatMessage[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+    const scrollBlockRef = useRef<HTMLDivElement>(null)
   
     const addToChat = useCallback((type: TMessageAuthor, message: string) => {
         if (!message.trim()) return;
         const newMessage = new Message(type, message);
         setChatHistory(history => [...history, newMessage]);
+        scrollBlockRef.current?.scrollIntoView({behavior: "smooth"})
     }, []);
 
     const fetchMessage = useCallback(async (message: string) => {
@@ -70,7 +72,7 @@ const useSendMessage = () => {
     return {
         chatHistory, clearChatHistory, isLoading, 
         setIsLoading: callIsLoading, isError, 
-        sendMessage, repeatSendMessage
+        sendMessage, repeatSendMessage, scrollBlockRef
     }
 }
 

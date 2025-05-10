@@ -60,7 +60,6 @@ const useMicrophone = () => {
     
         recognition.start();
         setIsListening(true);
-        console.log('Speak...');
 
         recognition.onresult = function(event: SpeechRecognitionEvent) {
             const text = event.results[0][0].transcript;
