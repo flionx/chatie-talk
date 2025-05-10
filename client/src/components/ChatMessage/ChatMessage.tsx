@@ -1,9 +1,9 @@
 import type { FC } from "react"
+import ReactMarkdown from 'react-markdown'
 import styles from './index.module.css'
 import Text from "../Text/Text"
 import type { TMessageAuthor } from "../../types/chat"
 import type { IWithChildren } from "../../types/react"
-import ReactMarkdown from 'react-markdown'
 
 interface Props extends IWithChildren {
     type: TMessageAuthor,
