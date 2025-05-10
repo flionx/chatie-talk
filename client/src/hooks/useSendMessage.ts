@@ -12,18 +12,25 @@ export type TSendMessageFunc = ({ message, clearInput, inputFocus }: ISendMessag
 const useSendMessage = () => {
     const [chatHistory, setChatHistory] = useState<IChatMessage[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [errorResponse, setErrorResponse] = useState({
+        isError: false,
+        message: '',
+    })
     const scrollBlockRef = useRef<HTMLDivElement>(null)
   
-    const addToChat = useCallback((type: TMessageAuthor, message: string) => {
-        if (!message.trim()) return;
+    const addToChat = useCallback((type: TMessageAuthor, message: string) => {        
+        if (type === 'user' && !message.trim()) return;        
         const newMessage = new Message(type, message);
         setChatHistory(history => [...history, newMessage]);
-        scrollBlockRef.current?.scrollIntoView({behavior: "smooth"})
+        setTimeout(() => {
+            scrollBlockRef.current?.scrollIntoView({behavior: "smooth"})
+        }, 0)
     }, []);
 
     const fetchMessage = useCallback(async (message: string) => {
-        setIsLoading(true)
+        setIsLoading(true);
+        setErrorResponse(c => ({...c, isError: false}));
+
         try {
             const response = await fetch('/api/chat', {
                 method: 'POST',
@@ -33,13 +40,22 @@ const useSendMessage = () => {
                 body: JSON.stringify({message}),
             })    
             if (!response.ok) {
-                setIsError(true)
+                setErrorResponse(c => ({...c, isError: true}));
+
             }
-            const messageAi = await response.json();
-            addToChat("bot", messageAi);
+            const messageAi = await response.json();  
+             if (typeof messageAi !== 'string' && typeof messageAi?.message !== 'string') {
+                throw new Error(messageAi.error);
+            }
+
+            const aiResponse = typeof messageAi === 'string' ? messageAi : messageAi.message;
+            addToChat("bot", aiResponse);
         } catch (error) {
+            setErrorResponse({
+                isError: true, 
+                message: error instanceof Error ? error.message : 'Unknown error occurred'
+            });
             console.log(error);
-            setIsError(true);
             await new Promise((res) => setTimeout(res, 1000));
         } finally {
             setIsLoading(false);
@@ -54,7 +70,7 @@ const useSendMessage = () => {
     
     const sendMessage = useCallback(async (
         {message, clearInput, inputFocus}: ISendMessageProps
-    ) => {
+    ) => {        
         addToChat("user", message);
         clearInput();
         if (inputFocus) inputFocus();
@@ -65,13 +81,13 @@ const useSendMessage = () => {
     
     const clearChatHistory = useCallback(() => {
         setChatHistory([]);
-        setIsError(false);
+        setErrorResponse(c => ({...c, isError: false}));
         setIsLoading(false);
     }, []);
     
     return {
         chatHistory, clearChatHistory, isLoading, 
-        setIsLoading: callIsLoading, isError, 
+        setIsLoading: callIsLoading, errorResponse, 
         sendMessage, repeatSendMessage, scrollBlockRef
     }
 }

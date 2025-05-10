@@ -24,8 +24,9 @@
 .repeat {
     display: flex;
     align-items: center;
-    column-gap: var(--block-padding);
+    gap: var(--block-padding);
     margin-bottom: var(--block-padding);
+    flex-wrap: wrap;
 }
 .scrollblock {
     height: var(--spacing-block);

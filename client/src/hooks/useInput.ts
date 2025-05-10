@@ -17,7 +17,12 @@ const useInput = (handleSendMessage: ({ message, clearInput, inputFocus }: ISend
         }
     }, [listenedText])
 
-    async function sendMessageToAI() {    
+    async function sendMessageToAI() { 
+        if (!message.trim()) {
+            inputRef.current?.focus();
+            return;
+        }
+
         const clearInput = () => setMessage('');
         const inputFocus = () => inputRef.current?.focus();
         handleSendMessage({message, clearInput, inputFocus})

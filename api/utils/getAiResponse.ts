@@ -1,3 +1,29 @@
+export interface AiResponse {
+  choices: {
+    message: {
+      content: string;
+      role: string;
+    };
+    index: number;
+  }[];
+  error?: {
+    message: string;
+    type: string;
+  };
+}
+interface IResponseAi {
+  choices: {
+    index: number,
+    message: {
+      content: string,
+      role: string,
+    }
+  }[],
+  error?: {
+    message: string
+  }
+}
+
 const getAiResponse = async (message: string, token: string): Promise<string> => {
     
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -21,10 +47,18 @@ const getAiResponse = async (message: string, token: string): Promise<string> =>
       const errorText = await response.text();
       throw Error(`OpenRouter error: ${errorText}`)
     }
-    const result = await response.json();
-    const aiResponse = result.choices[0].message.content as string;
+    const result = await response.json() as IResponseAi;
+    
+    const aiResponse = result?.choices?.[0]?.message?.content as string;
     if (!aiResponse) {
-      throw Error('AI response error');
+      if (result?.error?.message) {
+        const apiError = result?.error?.message;
+        if (apiError.toLocaleLowerCase().includes('credits')) {
+          throw Error('Message limit has been exceeded. Please come back later');
+        }
+        throw Error(apiError);
+      } 
+      throw Error('The AI response is generated with an error')
     }
 
     return aiResponse;

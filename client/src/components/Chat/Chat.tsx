@@ -9,12 +9,15 @@ import Text from '../Text/Text'
 interface Props {
   chatHistory: IChatMessage[],
   isLoading: boolean,
-  isError: boolean,
+  errorResponse: {
+    isError: boolean,
+    message: string,
+  },
   repeatSendMessage: () => Promise<void>,
   scrollBlockRef: RefObject<HTMLDivElement | null>
 }
 
-const Chat: FC<Props> = ({chatHistory, isLoading, isError, repeatSendMessage, scrollBlockRef}) => {
+const Chat: FC<Props> = ({chatHistory, isLoading, errorResponse, repeatSendMessage, scrollBlockRef}) => {
 
   return (
     <section className={styles.chat}>
@@ -25,11 +28,11 @@ const Chat: FC<Props> = ({chatHistory, isLoading, isError, repeatSendMessage, sc
           <ChatMessage key={message.id} type={message.type}>{message.message}</ChatMessage>
         ))}
         {isLoading && <Icon icon='loading'/>}
-        {!isLoading && isError && <>
+        {!isLoading && errorResponse.isError && <>
           <button className={styles.repeat}
             onClick={repeatSendMessage}>
               <Icon icon='repeat'/>
-              <Text>AI response error</Text>
+              <Text>{errorResponse.message}</Text>
           </button>
         </>}
         <div ref={scrollBlockRef} className={styles.scrollblock}></div>
