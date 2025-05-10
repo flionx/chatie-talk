@@ -44,12 +44,12 @@ const useSendMessage = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [])
+    }, [addToChat])
 
     const repeatSendMessage = useCallback(async () => {
         const lastMessage = [...chatHistory].reverse().find(msg => msg.type === 'user');        
         await fetchMessage(lastMessage?.message!)
-    }, []);
+    }, [chatHistory, fetchMessage]);
   
     
     const sendMessage = useCallback(async (
@@ -59,7 +59,7 @@ const useSendMessage = () => {
         clearInput();
         if (inputFocus) inputFocus();
         await fetchMessage(message)
-    }, [])
+    }, [addToChat, fetchMessage])
     
     const callIsLoading = useCallback<TSetState<boolean>>((value) => setIsLoading(value), []);
     
