@@ -3,6 +3,8 @@
 A minimalistic web app for communicating with AI.  
 Sending requests to [Openrouter.ai](https://openrouter.ai/), with the possibility of voice input using a microphone.
 
+📍 [Live Preview](https://chatie-talk.vercel.app/)
+
 ## Features
 
 - Inputting and sending Openrouter messages
