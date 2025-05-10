@@ -21,3 +21,9 @@
     margin-bottom: var(--spacing-medium);
     line-height: var(--line-height);
 }
+.repeat {
+    display: flex;
+    align-items: center;
+    column-gap: var(--block-padding);
+    margin-bottom: var(--block-padding);
+}

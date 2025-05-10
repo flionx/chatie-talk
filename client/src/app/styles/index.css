@@ -12,7 +12,7 @@ body {
   background-color: var(--color-primary);
 
 }
-.container {
+#root {
   height: 100dvh;
   padding: 64px 40% 57px var(--container-padding-x);
   display: flex;

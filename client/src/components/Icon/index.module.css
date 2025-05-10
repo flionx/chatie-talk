@@ -28,6 +28,7 @@
     width: 33px;
     height: 33px;
     animation: rotate-anim .8s infinite linear;
+    margin-bottom: var(--block-padding);
 }
 .repeat {
     display: block;

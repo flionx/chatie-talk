@@ -39,7 +39,7 @@ interface ISpeechRecognitionInstance {
   stop(): void;
   onresult: (event: SpeechRecognitionEvent) => void;
   onspeechend: () => void;
-  onerror: (event: Event) => void;
+  onend: () => void;
 }
 
 const useMicrophone = () => {
@@ -70,6 +70,9 @@ const useMicrophone = () => {
 
         recognition.onspeechend = function() {
             recognition.stop();
+            setIsListening(false);
+        }
+        recognition.onend = function() {
             setIsListening(false);
         }
     }

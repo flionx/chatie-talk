@@ -1,55 +1,14 @@
-import { useEffect, useRef, useState, type FC } from "react"
+import { type FC } from "react"
+import type { TSendMessageFunc } from "../../hooks/useSendMessage"
 import styles from './index.module.css'
 import ButtonUI from "../ButtonUI/ButtonUI"
 import Icon from "../Icon/Icon"
-import useMicrophone from "../../hooks/useMicrophone"
-import type { TMessageAuthor } from "../../types/chat"
-import type { TSetState } from "../../types/react"
+import useInput from "../../hooks/useInput"
 interface Props {
-    handleAddToChat: (type: TMessageAuthor, message: string) => void,
-    setIsLoading: TSetState<boolean>,
+    handleSendMessage: TSendMessageFunc,
 }
-const InputMessage:FC<Props> = ({handleAddToChat, setIsLoading}) => {
-    const [message, setMessage] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    const {listenedText, isListening, startListening} = useMicrophone();
-
-    useEffect(() => {
-        if (listenedText) {
-            inputRef.current?.focus();
-            const index = inputRef.current?.selectionStart ?? message.length;
-            const newMessage = `${message.slice(0, index)} ${listenedText} ${message.slice(index)}`;
-            setMessage(newMessage);
-        }
-    }, [listenedText])
-
-    async function sendMessageToAI() {    
-        handleAddToChat("user", message);
-        setMessage('');
-        inputRef.current?.focus();
-        setIsLoading(true)
-
-        try {
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({message}),
-            })    
-            if (!response.ok) {
-                throw Error('Error')
-            }
-            const messageAi = await response.json();
-            handleAddToChat("bot", messageAi);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-        }
-
-    }
+const InputMessage:FC<Props> = ({handleSendMessage}) => {
+    const {message, setMessage, isListening, startListening, sendMessageToAI, inputRef} = useInput(handleSendMessage)
 
   return (
     <form className={styles.block} onSubmit={e => {

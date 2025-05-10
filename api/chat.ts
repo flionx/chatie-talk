@@ -3,7 +3,7 @@ import getAiResponse from "./utils/getAiResponse";
 import catchError from "./utils/catchError";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader("Access-Control-Allow-Origin", "https://chat-me.vercel.app");
+  res.setHeader("Access-Control-Allow-Origin", "https://chatie-talk.vercel.app");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 

@@ -5,12 +5,15 @@ import TitleBig from '../TitleBig/TitleBig'
 import ChatMessage from '../ChatMessage/ChatMessage'
 import styles from './index.module.css'
 import Icon from '../Icon/Icon'
+import Text from '../Text/Text'
 interface Props {
   chatHistory: IChatMessage[],
   isLoading: boolean,
+  isError: boolean,
+  repeatSendMessage: () => Promise<void>
 }
 
-const Chat: FC<Props> = ({chatHistory, isLoading}) => {
+const Chat: FC<Props> = ({chatHistory, isLoading, isError, repeatSendMessage}) => {
 
   return (
     <section className={styles.chat}>
@@ -21,6 +24,13 @@ const Chat: FC<Props> = ({chatHistory, isLoading}) => {
           <ChatMessage key={message.id} type={message.type}>{message.message}</ChatMessage>
         ))}
         {isLoading && <Icon icon='loading'/>}
+        {!isLoading && isError && <>
+          <button className={styles.repeat}
+            onClick={repeatSendMessage}>
+              <Icon icon='repeat'/>
+              <Text>AI response error</Text>
+          </button>
+        </>}
     </section>
   )
 }
