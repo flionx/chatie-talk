@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+# Chatie talk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalistic web app for communicating with AI.  
+Sending requests to [Openrouter.ai](https://openrouter.ai/), with the possibility of voice input using a microphone.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Inputting and sending Openrouter messages
+- Displaying AI responses with markdown support
+- Load indicator and error handling
+- Voice input via Web Speech API
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/flionx/chat-me.git
+   ```
+2. Go to the project folder:
+   ```bash
+   cd chatie-talk
+   ```
+3. Start the Frontend:
+   ```bash
+   cd client
+   npm i
+   npm run dev
+   ```
+[Create token](https://openrouter.ai/settings/keys) for Openrouter.ai 
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+4. Create an .env:
+   ```bash
+   cd ..
+   touch api/local/.env
+   ```
+5.  Inside it set the variable:
+   ```bash
+   AI_TOKEN=yourToken
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+4. Start the Backend:
+   ```bash
+   cd api
+   npm i
+   npm run server
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Stack
+- Frontend: React + Vite + TypeScript + React markdown
+- Backend: Node.js + Express + TypeScript
+- APIS: [Openrouter.ai](https://openrouter.ai/)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## License  
+
+This project is distributed under the MIT license. See the [LICENSE](LICENSE). file for details.
