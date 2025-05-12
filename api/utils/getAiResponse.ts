@@ -1,16 +1,4 @@
 export interface AiResponse {
-  choices: {
-    message: {
-      content: string;
-      role: string;
-    };
-    index: number;
-  }[];
-  error?: {
-    message: string;
-    type: string;
-  };
-}
 interface IResponseAi {
   choices: {
     index: number,
