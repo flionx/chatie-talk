@@ -1,5 +1,4 @@
 export interface IResponseAi {
-interface IResponseAi {
   choices: {
     index: number,
     message: {
