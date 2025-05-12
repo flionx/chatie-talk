@@ -1,17 +1,4 @@
-export interface AiResponse {
-  choices: {
-    message: {
-      content: string;
-      role: string;
-    };
-    index: number;
-  }[];
-  error?: {
-    message: string;
-    type: string;
-  };
-}
-interface IResponseAi {
+export interface IResponseAi {
   choices: {
     index: number,
     message: {
@@ -33,13 +20,14 @@ const getAiResponse = async (message: string, token: string): Promise<string> =>
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.0-flash-exp:free',
+        model: 'meta-llama/llama-4-scout:free',
         messages: [
           {
             role: 'user',
             content: message,
           },
         ],
+        max_tokens: 400,
       }),
     });
     
