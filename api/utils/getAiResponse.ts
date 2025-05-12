@@ -1,4 +1,4 @@
-export interface AiResponse {
+export interface IResponseAi {
 interface IResponseAi {
   choices: {
     index: number,
